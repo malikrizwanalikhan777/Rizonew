@@ -42,21 +42,16 @@ jobs:
               -keypass android \
               -keyalg RSA -keysize 2048 -validity 10000 \
               -dname "CN=Android Debug,O=Android,C=US"
-          else
-            echo "debug.keystore already exists"
           fi
 
       - name: Prepare dummy .env
         run: |
           if [ ! -f "${{ github.workspace }}/.env" ]; then
             cp .env.example .env || touch .env
-            echo "Dummy .env created"
-          else
-            echo ".env already exists"
           fi
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon --no-configuration-cache --stacktrace
+        run: gradle assembleDebug --no-daemon --no-configuration-cache --stacktrace
 
       - name: Upload APK
         if: always()
