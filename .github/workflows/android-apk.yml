@@ -19,11 +19,11 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Install Gradle 8.10
+      - name: Install Gradle 8.11.1
         run: |
-          wget https://services.gradle.org/distributions/gradle-8.10-bin.zip
-          unzip gradle-8.10-bin.zip
-          echo "$PWD/gradle-8.10/bin" >> $GITHUB_PATH
+          wget https://services.gradle.org/distributions/gradle-8.11.1-bin.zip
+          unzip gradle-8.11.1-bin.zip
+          echo "$PWD/gradle-8.11.1/bin" >> $GITHUB_PATH
 
       - name: Generate Debug Keystore
         run: |
