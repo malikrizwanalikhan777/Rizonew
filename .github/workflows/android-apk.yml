@@ -25,6 +25,16 @@ jobs:
           unzip gradle-8.10-bin.zip
           echo "$PWD/gradle-8.10/bin" >> $GITHUB_PATH
 
+      - name: Generate Debug Keystore
+        run: |
+          keytool -genkey -v -keystore ${{ github.workspace }}/debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+
+      - name: Prepare dummy .env
+        run: |
+          if [ ! -f "${{ github.workspace }}/.env" ]; then
+            cp .env.example .env || touch .env
+          fi
+
       - name: Build Debug APK
         run: gradle assembleDebug --stacktrace --no-daemon
 
